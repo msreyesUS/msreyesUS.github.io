@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarPlay Drive — Smart Mileage Tracking</title>
+<meta name="description" content="CarPlay Drive tracks your business mileage right from your car's screen: one-tap categorized trips, calendar integration, and CSV exports for tax time.">
+<meta property="og:title" content="CarPlay Drive — Smart Mileage Tracking">
+<meta property="og:description" content="Track categorized mileage from CarPlay, write trips to your calendar, and export CSV reports for tax time.">
+<meta property="og:image" content="images/og-image.png">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --accent: #2456e6;
+    --accent-soft: rgba(36, 86, 230, 0.1);
+    --border: rgba(0, 0, 0, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0d0f;
+      --card: #1c1c1e;
+      --text: #f5f5f7;
+      --muted: #98989d;
+      --accent: #4c7dff;
+      --accent-soft: rgba(76, 125, 255, 0.15);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header {
+    padding: 56px 0 40px;
+    text-align: center;
+  }
+  .app-icon {
+    width: 96px; height: 96px;
+    border-radius: 22px;
+    background: var(--accent-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 12px;
+    border: 1px dashed var(--border);
+    margin-bottom: 16px;
+  }
+  .app-icon img { width: 100%; height: 100%; border-radius: 22px; object-fit: cover; }
+  h1 { font-size: 40px; letter-spacing: -0.02em; }
+  .tagline { font-size: 20px; color: var(--muted); margin-top: 8px; }
+  .badges { margin-top: 20px; color: var(--muted); font-size: 14px; }
+  section { padding: 36px 0; }
+  h2 { font-size: 26px; margin-bottom: 18px; letter-spacing: -0.01em; }
+  .hero {
+    display: flex; gap: 32px; align-items: center; flex-wrap: wrap;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+  }
+  .hero-copy { flex: 1 1 320px; }
+  .hero-copy p { color: var(--muted); margin-bottom: 12px; }
+  .placeholder {
+    background: var(--accent-soft);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px; text-align: center; padding: 8px;
+  }
+  .placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+  .ph-phone { width: 240px; height: 490px; flex: 0 0 auto; margin: 0 auto; }
+  .ph-carplay { width: 100%; aspect-ratio: 5 / 3; }
+  .grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+  }
+  .card h3 { font-size: 17px; margin-bottom: 6px; }
+  .card p { font-size: 15px; color: var(--muted); }
+  .emoji { font-size: 26px; display: block; margin-bottom: 10px; }
+  .faq details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+  .faq summary { font-weight: 600; cursor: pointer; }
+  .faq p { color: var(--muted); margin-top: 10px; font-size: 15px; }
+  .support-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+  }
+  .support-box p { color: var(--muted); max-width: 560px; margin: 0 auto 18px; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 999px;
+  }
+  footer {
+    padding: 32px 0 48px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <!-- IMAGE: app-icon.png (512×512) -->
+  <div class="app-icon">app-icon.png<br>512×512</div>
+  <h1>CarPlay Drive</h1>
+  <p class="tagline">Smart mileage tracking, right from your car's screen.</p>
+  <p class="badges">For iPhone with CarPlay &nbsp;·&nbsp; Subscription with 1-week free trial</p>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="hero">
+      <div class="hero-copy">
+        <h2>Every deductible mile, captured</h2>
+        <p>CarPlay Drive turns your car's screen into a mileage logger. Tap a category — Business, Medical, Charity, or your own — and your trip records automatically: distance, time, and the estimated deduction at your configured rate.</p>
+        <p>When you arrive, tap Complete. The trip is saved on your iPhone and, if you choose, written into the notes of the calendar event you drove to — so your mileage log and your meeting history tell the same story.</p>
+      </div>
+      <!-- IMAGE: screenshot-iphone-dashboard.png (1290×2796) -->
+      <div class="placeholder ph-phone">screenshot-iphone-dashboard.png<br>1290×2796</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Built for the driver's seat</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="emoji">🚗</span>
+        <h3>One-tap starts on CarPlay</h3>
+        <p>Your categories appear as a simple list on the car screen. Tap one and tracking starts — no phone handling, no fiddling.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">📅</span>
+        <h3>Calendar integration</h3>
+        <p>See your upcoming events on CarPlay, start a drive tagged to one, and the trip details write into that event's notes when you complete it. Automatic, ask-first, or off — your choice.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🗺️</span>
+        <h3>Directions handoff</h3>
+        <p>One tap opens Apple Maps, Google Maps, or Waze with your event's address as the destination — while tracking continues in the background.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🏷️</span>
+        <h3>Categories &amp; rates, your way</h3>
+        <p>Create categories with custom icons and colors, each with its own deduction rate and scheduled rate rules for different days or date ranges.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">📊</span>
+        <h3>CSV export for tax time</h3>
+        <p>Filter by date range and category, then export a spreadsheet with distance, duration, rate, and the estimated deduction for every trip.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🔒</span>
+        <h3>Private by design</h3>
+        <p>Your trips stay on your device and in your personal iCloud account. No external servers, no accounts, no data sharing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>On the car screen</h2>
+    <div class="grid">
+      <div>
+        <!-- IMAGE: screenshot-carplay-home.png (1600×960) -->
+        <div class="placeholder ph-carplay">screenshot-carplay-home.png<br>1600×960</div>
+      </div>
+      <div>
+        <!-- IMAGE: screenshot-carplay-trip.png (1600×960) -->
+        <div class="placeholder ph-carplay">screenshot-carplay-trip.png<br>1600×960</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>How does trip tracking work?</summary>
+      <p>Start a trip from CarPlay, your iPhone, or Siri ("Start tracking with CarPlay Drive"). The app uses GPS to measure distance while you drive. Tap Complete when you arrive and the trip is saved with its category, duration, and estimated deduction.</p>
+    </details>
+    <details>
+      <summary>Why does the app ask for "Always" location access?</summary>
+      <p>So a trip you start from CarPlay or Siri can keep recording while your phone stays locked in your pocket. Location is only used while a trip is actively tracking, and it never leaves your device.</p>
+    </details>
+    <details>
+      <summary>What happens if I unplug from CarPlay mid-trip?</summary>
+      <p>Your choice, in Settings: pause the trip quietly, complete and save it, or pause and send a notification so you can decide from your phone.</p>
+    </details>
+    <details>
+      <summary>Can it skip short trips?</summary>
+      <p>Yes — set a minimum trip distance in Settings and anything shorter is discarded automatically.</p>
+    </details>
+    <details>
+      <summary>What does the subscription include?</summary>
+      <p>Everything: CarPlay tracking, calendar integration, custom categories and rates, and CSV export. Monthly and yearly plans both start with a 1-week free trial, and you can cancel anytime in your Apple account settings.</p>
+    </details>
+    <details>
+      <summary>How do I restore my subscription on a new phone?</summary>
+      <p>Install the app, then tap Restore Purchases in Settings. Your trips restore automatically from your personal iCloud.</p>
+    </details>
+  </section>
+
+  <section>
+    <div class="support-box">
+      <h2>Support</h2>
+      <p>Questions, problems, or feature ideas? Email us and we'll get back to you within 2 business days. Include your iPhone model and iOS version if you're reporting an issue.</p>
+      <a class="btn" href="mailto:marcoreyes@gmail.com?subject=CarPlay%20Drive%20Support">Email Support</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>© 2026 CarPlay Drive. All rights reserved.</p>
+  <p>CarPlay is a trademark of Apple Inc. &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a> &nbsp;·&nbsp; <a href="mailto:marcoreyes@gmail.com">Contact</a></p>
+</footer>
+
+</body>
+</html>
